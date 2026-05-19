@@ -77,6 +77,7 @@ main() {
   show_synchronize_panes_label=$(get_tmux_option "@ukiyo-synchronize-panes-label" "Sync")
   time_format=$(get_tmux_option "@ukiyo-time-format" "")
   show_ssh_session_port=$(get_tmux_option "@ukiyo-show-ssh-session-port" false)
+  show_ssh_session_short_hostname=$(get_tmux_option "@ukiyo-ssh-session-short-hostname" false)
   IFS=' ' read -r -a plugins <<<$(get_tmux_option "@ukiyo-plugins" "battery network weather")
   show_empty_plugins=$(get_tmux_option "@ukiyo-show-empty-plugins" true)
 
@@ -327,7 +328,7 @@ main() {
 
     elif [ $plugin = "ssh-session" ]; then
       IFS=' ' read -r -a colors <<<$(get_tmux_option "@ukiyo-ssh-session-colors" "accent bg_pane")
-      script="#($current_dir/ssh_session.sh $show_ssh_session_port)"
+      script="#($current_dir/ssh_session.sh $show_ssh_session_port $show_ssh_session_short_hostname)"
 
     elif [ $plugin = "openconnect" ]; then
       IFS=' ' read -r -a colors <<<$(get_tmux_option "@ukiyo-openconnect-colors" "info bg_pane")

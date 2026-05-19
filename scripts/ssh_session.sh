@@ -4,6 +4,7 @@
 export LC_ALL=en_US.UTF-8
 
 show_ssh_session_port=$1
+show_ssh_session_short_hostname=$2
 
 parse_ssh_port() {
   # Get port from connection
@@ -111,6 +112,12 @@ ssh_connected() {
 
 main() {
   hostname=$(get_info hostname)
+
+  # Use short hostname if option enabled
+  if [ "$show_ssh_session_short_hostname" == "true" ]; then
+    hostname=$(echo $hostname | cut -d. -f1)
+  fi
+
   user=$(get_info whoami)
 
   # Only show port info if ssh session connected (no localhost) and option enabled
