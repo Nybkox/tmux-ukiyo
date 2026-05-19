@@ -69,6 +69,10 @@ render() {
   # Dracula variants
   local d_classic=$(mark_if_active "$current_theme" "dracula/classic" "Classic")
 
+  # Bru variants
+  local b_espresso=$(mark_if_active "$current_theme" "bru/espresso" "Espresso")
+  local b_latte=$(mark_if_active "$current_theme" "bru/latte" "Latte")
+
   tmux display-menu -T "#[align=centre fg=green]Themes" -x R -y P \
     "" \
     "" \
@@ -114,6 +118,10 @@ render() {
     "" \
     "#[align=centre]─── Dracula ───" "" "" \
     "$d_classic" d "run -b '#{@ukiyo-root}/scripts/actions.sh set_state_and_tmux_option theme dracula/classic'" \
+    "" \
+    "#[align=centre]─── Bru ───" "" "" \
+    "$b_espresso" e "run -b '#{@ukiyo-root}/scripts/actions.sh set_state_and_tmux_option theme bru/espresso'" \
+    "$b_latte" l "run -b '#{@ukiyo-root}/scripts/actions.sh set_state_and_tmux_option theme bru/latte'" \
     "" \
     "<-- Back" b "run -b 'source #{@ukiyo-root}/menu_items/main.sh'" \
     "Close menu" q ""

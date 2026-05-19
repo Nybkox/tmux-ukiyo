@@ -39,6 +39,7 @@ get_default_variant() {
   rose-pine) echo "main" ;;
   solarized) echo "dark" ;;
   onedark) echo "dark" ;;
+  bru) echo "espresso" ;;
   *) echo "default" ;;
   esac
 }

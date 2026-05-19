@@ -62,6 +62,10 @@ set -g @ukiyo-theme "onedark/deep"     # Deepest background
 set -g @ukiyo-theme "onedark/warm"     # Warm tones
 set -g @ukiyo-theme "onedark/warmer"   # Warmer tones
 
+# Bru variants
+set -g @ukiyo-theme "bru/espresso"  # default dark
+set -g @ukiyo-theme "bru/latte"     # light
+
 # Legacy format still works
 set -g @ukiyo-theme "wave"  # same as kanagawa/wave
 ```
