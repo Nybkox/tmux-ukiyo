@@ -150,6 +150,26 @@ Muted storm backdrop, neon synthwave accents.
 | midnight | Darker backgrounds                     |
 | morning  | Light variant                          |
 
+### Adding a New Theme
+
+1. Create `themes/<theme-name>/palette.sh` with raw color definitions (hex values).
+2. Create one variant file per variant (e.g. `themes/<theme-name>/dark.sh`) mapping palette colors to the semantic names listed under [Custom Colors](#custom-colors) (`text`, `bg_bar`, `bg_pane`, `highlight`, `selection`, `info`, `accent`, `notice`, `error`, `muted`, `alert`).
+3. Register the default variant in `themes/loader.sh` inside `get_default_variant()`:
+
+   ```bash
+   <theme-name>) echo "<default-variant>" ;;
+   ```
+
+4. Add the theme to `menu_items/colors.sh` in two places:
+   - Append a row to the `FAMILIES` array: `"<theme-name>|<menu-key>|<Display Label>"` (pick an unused key letter).
+   - Add a case branch to `get_variants()` listing the variants as `variant-id:Label`:
+
+     ```bash
+     <theme-name>) printf '%s\n' "dark:Dark" "light:Light" ;;
+     ```
+
+The two-level themes menu (`prefix + T → Themes`) will then show the new family with a submenu of its variants. Active selections are marked with `*`.
+
 ### Custom Colors
 
 Override any semantic color via `@ukiyo-color-<name>`. Accepts hex values or color variable names from the palette.
