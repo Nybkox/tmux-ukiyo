@@ -73,6 +73,11 @@ render() {
   local b_espresso=$(mark_if_active "$current_theme" "bru/espresso" "Espresso")
   local b_latte=$(mark_if_active "$current_theme" "bru/latte" "Latte")
 
+  # Jozi City Nights variants
+  local j_nights=$(mark_if_active "$current_theme" "jozi-city-nights/nights" "Nights")
+  local j_midnight=$(mark_if_active "$current_theme" "jozi-city-nights/midnight" "Midnight")
+  local j_morning=$(mark_if_active "$current_theme" "jozi-city-nights/morning" "Morning")
+
   tmux display-menu -T "#[align=centre fg=green]Themes" -x R -y P \
     "" \
     "" \
@@ -122,6 +127,11 @@ render() {
     "#[align=centre]─── Bru ───" "" "" \
     "$b_espresso" e "run -b '#{@ukiyo-root}/scripts/actions.sh set_state_and_tmux_option theme bru/espresso'" \
     "$b_latte" l "run -b '#{@ukiyo-root}/scripts/actions.sh set_state_and_tmux_option theme bru/latte'" \
+    "" \
+    "#[align=centre]─── Jozi City Nights ───" "" "" \
+    "$j_nights" j "run -b '#{@ukiyo-root}/scripts/actions.sh set_state_and_tmux_option theme jozi-city-nights/nights'" \
+    "$j_midnight" i "run -b '#{@ukiyo-root}/scripts/actions.sh set_state_and_tmux_option theme jozi-city-nights/midnight'" \
+    "$j_morning" m "run -b '#{@ukiyo-root}/scripts/actions.sh set_state_and_tmux_option theme jozi-city-nights/morning'" \
     "" \
     "<-- Back" b "run -b 'source #{@ukiyo-root}/menu_items/main.sh'" \
     "Close menu" q ""
