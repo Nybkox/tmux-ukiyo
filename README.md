@@ -1,6 +1,6 @@
 # Ukiyo for [tmux](https://github.com/tmux/tmux/wiki)
 
-Multi-theme tmux status bar with [Kanagawa](https://github.com/rebelot/kanagawa.nvim), [Dracula](https://draculatheme.com/) [Tokyo Night](https://github.com/folke/tokyonight.nvim), and [Catppuccin](https://github.com/catppuccin/catppuccin) color schemes.
+Multi-theme tmux status bar with [Kanagawa](https://github.com/rebelot/kanagawa.nvim), [Dracula](https://draculatheme.com/) [Tokyo Night](https://github.com/folke/tokyonight.nvim), [Catppuccin](https://github.com/catppuccin/catppuccin), [Bru](https://github.com/kmf/bru), and [Jozi City Nights](https://github.com/kmf/jozi-city-nights) color schemes.
 
 Forked from [dracula/tmux](https://github.com/dracula/tmux).
 
@@ -65,6 +65,11 @@ set -g @ukiyo-theme "onedark/warmer"   # Warmer tones
 # Bru variants
 set -g @ukiyo-theme "bru/espresso"  # default dark
 set -g @ukiyo-theme "bru/latte"     # light
+
+# Jozi City Nights variants
+set -g @ukiyo-theme "jozi-city-nights/nights"    # default dark, synthwave
+set -g @ukiyo-theme "jozi-city-nights/midnight"  # darker backgrounds
+set -g @ukiyo-theme "jozi-city-nights/morning"   # light
 
 # Legacy format still works
 set -g @ukiyo-theme "wave"  # same as kanagawa/wave
@@ -134,6 +139,36 @@ set -g @ukiyo-ignore-window-colors true
 | moon    | Default, softer colors |
 | storm   | Original dark theme    |
 | night   | Darker backgrounds     |
+
+### Jozi City Nights
+
+Muted storm backdrop, neon synthwave accents.
+
+| Variant  | Description                            |
+| -------- | -------------------------------------- |
+| nights   | Default dark — Tokyo Night–style storm |
+| midnight | Darker backgrounds                     |
+| morning  | Light variant                          |
+
+### Adding a New Theme
+
+1. Create `themes/<theme-name>/palette.sh` with raw color definitions (hex values).
+2. Create one variant file per variant (e.g. `themes/<theme-name>/dark.sh`) mapping palette colors to the semantic names listed under [Custom Colors](#custom-colors) (`text`, `bg_bar`, `bg_pane`, `highlight`, `selection`, `info`, `accent`, `notice`, `error`, `muted`, `alert`).
+3. Register the default variant in `themes/loader.sh` inside `get_default_variant()`:
+
+   ```bash
+   <theme-name>) echo "<default-variant>" ;;
+   ```
+
+4. Add the theme to `menu_items/colors.sh` in two places:
+   - Append a row to the `FAMILIES` array: `"<theme-name>|<menu-key>|<Display Label>"` (pick an unused key letter).
+   - Add a case branch to `get_variants()` listing the variants as `variant-id:Label`:
+
+     ```bash
+     <theme-name>) printf '%s\n' "dark:Dark" "light:Light" ;;
+     ```
+
+The two-level themes menu (`prefix + T → Themes`) will then show the new family with a submenu of its variants. Active selections are marked with `*`.
 
 ### Custom Colors
 

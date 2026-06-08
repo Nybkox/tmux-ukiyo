@@ -40,6 +40,7 @@ get_default_variant() {
   solarized) echo "dark" ;;
   onedark) echo "dark" ;;
   bru) echo "espresso" ;;
+  jozi-city-nights) echo "nights" ;;
   *) echo "default" ;;
   esac
 }
