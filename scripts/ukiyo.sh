@@ -11,7 +11,10 @@ source $current_dir/theme.sh
 migrate_legacy_options
 
 main() {
-  tmux bind-key -r T run-shell "#{@ukiyo-root}/menu_items/main.sh"
+  menu_key=$(get_tmux_option "@ukiyo-menu-key" "T")
+  if [ "$menu_key" != "none" ]; then
+    tmux bind-key -r "$menu_key" run-shell "#{@ukiyo-root}/menu_items/main.sh"
+  fi
 
   # set theme
   theme_option=$(get_tmux_option "@ukiyo-theme" "")
