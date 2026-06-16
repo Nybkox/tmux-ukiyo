@@ -20,6 +20,12 @@ Configuration and options can be found at [draculatheme.com/tmux](https://dracul
 Just replace all `dracula` occurrences with `ukiyo`.
 
 Select a theme using `@ukiyo-theme` with format `theme/variant`. Press prefix+T for interactive menu.
+You can change the menu keybinding or disable it using `@ukiyo-menu-key`:
+
+```bash
+set -g @ukiyo-menu-key "M"    # Change to prefix+M
+set -g @ukiyo-menu-key "none" # Disable the menu keybinding
+```
 
 ```bash
 # Kanagawa variants
