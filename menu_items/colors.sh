@@ -67,9 +67,9 @@ render_top() {
     if [[ "$current_theme" == "${prefix}"* ]]; then
       marker="*"
     fi
-    args+=("${label}${marker} >" "$key" "run -b 'UKIYO_MENU_FAMILY=${id} source #{@ukiyo-root}/menu_items/colors.sh'")
+    args+=("${label}${marker} >" "$key" "run -b 'UKIYO_MENU_FAMILY=${id} #{@ukiyo-root}/menu_items/colors.sh'")
   done
-  args+=("" "<-- Back" "b" "run -b 'source #{@ukiyo-root}/menu_items/main.sh'" "Close menu" "q" "")
+  args+=("" "<-- Back" "b" "run -b '#{@ukiyo-root}/menu_items/main.sh'" "Close menu" "q" "")
   tmux display-menu -T "#[align=centre fg=green]Themes" -x R -y P "${args[@]}"
 }
 
@@ -97,7 +97,7 @@ render_family() {
     args+=("$marked" "$i" "run -b '#{@ukiyo-root}/scripts/actions.sh set_state_and_tmux_option theme ${family}/${vid}'")
     i=$((i + 1))
   done < <(get_variants "$family")
-  args+=("" "<-- Back" "b" "run -b 'source #{@ukiyo-root}/menu_items/colors.sh'" "Close menu" "q" "")
+  args+=("" "<-- Back" "b" "run -b '#{@ukiyo-root}/menu_items/colors.sh'" "Close menu" "q" "")
   tmux display-menu -T "#[align=centre fg=green]$title" -x R -y P "${args[@]}"
 }
 
