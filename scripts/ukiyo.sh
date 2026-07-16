@@ -12,7 +12,7 @@ migrate_legacy_options
 
 main() {
   menu_key=$(get_tmux_option "@ukiyo-menu-key" "T")
-  if [ "$menu_key" != "none" ]; then
+  if [ "$menu_key" ] && [ "$menu_key" != "none" ]; then
     tmux bind-key -r "$menu_key" run-shell "#{@ukiyo-root}/menu_items/main.sh"
   fi
 
