@@ -25,6 +25,7 @@ You can change the menu keybinding or disable it using `@ukiyo-menu-key`:
 ```bash
 set -g @ukiyo-menu-key "M"    # Change to prefix+M
 set -g @ukiyo-menu-key "none" # Disable the menu keybinding
+set -g @ukiyo-menu-key ""     # Same as "none"
 ```
 
 ```bash
