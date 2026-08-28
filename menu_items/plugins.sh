@@ -22,28 +22,28 @@ render() {
   tmux display-menu -T "#[align=centre fg=green]Plugins" -x R -y P \
     "" \
     "" \
-    "$(get_plugin_title "battery")" A "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin battery; source $CURRENT_FILE" \
-    "$(get_plugin_title "cpu-usage")" B "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin cpu-usage; source $CURRENT_FILE" \
-    "$(get_plugin_title "git")" C "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin git; source $CURRENT_FILE" \
-    "$(get_plugin_title "gpu-usage")" D "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin gpu-usage; source $CURRENT_FILE" \
-    "$(get_plugin_title "ram-usage")" E "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin ram-usage; source $CURRENT_FILE" \
-    "$(get_plugin_title "tmux-ram-usage")" F "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin tmux-ram-usage; source $CURRENT_FILE" \
-    "$(get_plugin_title "network")" G "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin network; source $CURRENT_FILE" \
-    "$(get_plugin_title "network-bandwidth")" H "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin network-bandwidth; source $CURRENT_FILE" \
-    "$(get_plugin_title "network-ping")" I "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin network-ping; source $CURRENT_FILE" \
-    "$(get_plugin_title "ssh-session")" J "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin ssh-session; source $CURRENT_FILE" \
-    "$(get_plugin_title "attached-clients")" K "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin attached-clients; source $CURRENT_FILE" \
-    "$(get_plugin_title "network-vpn")" L "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin network-vpn; source $CURRENT_FILE" \
-    "$(get_plugin_title "weather")" M "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin weather; source $CURRENT_FILE" \
-    "$(get_plugin_title "time")" N "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin time; source $CURRENT_FILE" \
-    "$(get_plugin_title "mpc")" O "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin mpc; source $CURRENT_FILE" \
-    "$(get_plugin_title "spotify-tui")" P "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin spotify-tui; source $CURRENT_FILE" \
-    "$(get_plugin_title "playerctl")" Q "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin playerctl; source $CURRENT_FILE" \
-    "$(get_plugin_title "kubernetes-context")" R "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin kubernetes-context; source $CURRENT_FILE" \
-    "$(get_plugin_title "synchronize-panes")" S "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin synchronize-panes; source $CURRENT_FILE" \
-    "$(get_plugin_title "openconnect")" T "run -b 'source #{@ukiyo-root}/scripts/actions.sh toggle_plugin openconnect; source $CURRENT_FILE" \
+    "$(get_plugin_title "battery")" A "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin battery; $CURRENT_FILE" \
+    "$(get_plugin_title "cpu-usage")" B "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin cpu-usage; $CURRENT_FILE" \
+    "$(get_plugin_title "git")" C "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin git; $CURRENT_FILE" \
+    "$(get_plugin_title "gpu-usage")" D "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin gpu-usage; $CURRENT_FILE" \
+    "$(get_plugin_title "ram-usage")" E "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin ram-usage; $CURRENT_FILE" \
+    "$(get_plugin_title "tmux-ram-usage")" F "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin tmux-ram-usage; $CURRENT_FILE" \
+    "$(get_plugin_title "network")" G "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin network; $CURRENT_FILE" \
+    "$(get_plugin_title "network-bandwidth")" H "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin network-bandwidth; $CURRENT_FILE" \
+    "$(get_plugin_title "network-ping")" I "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin network-ping; $CURRENT_FILE" \
+    "$(get_plugin_title "ssh-session")" J "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin ssh-session; $CURRENT_FILE" \
+    "$(get_plugin_title "attached-clients")" K "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin attached-clients; $CURRENT_FILE" \
+    "$(get_plugin_title "network-vpn")" L "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin network-vpn; $CURRENT_FILE" \
+    "$(get_plugin_title "weather")" M "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin weather; $CURRENT_FILE" \
+    "$(get_plugin_title "time")" N "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin time; $CURRENT_FILE" \
+    "$(get_plugin_title "mpc")" O "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin mpc; $CURRENT_FILE" \
+    "$(get_plugin_title "spotify-tui")" P "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin spotify-tui; $CURRENT_FILE" \
+    "$(get_plugin_title "playerctl")" Q "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin playerctl; $CURRENT_FILE" \
+    "$(get_plugin_title "kubernetes-context")" R "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin kubernetes-context; $CURRENT_FILE" \
+    "$(get_plugin_title "synchronize-panes")" S "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin synchronize-panes; $CURRENT_FILE" \
+    "$(get_plugin_title "openconnect")" T "run -b '#{@ukiyo-root}/scripts/actions.sh toggle_plugin openconnect; $CURRENT_FILE" \
     "" \
-    "<-- Back" b "run -b 'source #{@ukiyo-root}/menu_items/main.sh" \
+    "<-- Back" b "run -b '#{@ukiyo-root}/menu_items/main.sh" \
     "Close menu" q ""
 }
 
