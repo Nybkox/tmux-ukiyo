@@ -13,16 +13,23 @@ migrate_legacy_options
 main() {
   menu_key=$(get_tmux_option "@ukiyo-menu-key" "T")
   bound_menu_key=$(get_tmux_option "@_ukiyo-menu-key-bound" "")
+  # recover the default binding created before binding state was tracked
+  if [ -z "$bound_menu_key" ] &&
+    tmux list-keys -T prefix T 2>/dev/null | grep -Fq '#{@ukiyo-root}/menu_items/main.sh'; then
+    bound_menu_key="T"
+  fi
 
   # unbind old menu key if it changed
   if [ -n "$bound_menu_key" ] && [ "$bound_menu_key" != "$menu_key" ]; then
     tmux unbind-key "$bound_menu_key" 2>/dev/null || true
   fi
 
-  # bind new menu key and save state
+  # bind new menu key and save state, or clear state when disabled
   if [ "$menu_key" ] && [ "$menu_key" != "none" ]; then
     tmux bind-key -r "$menu_key" run-shell "#{@ukiyo-root}/menu_items/main.sh"
     tmux set-option -gq "@_ukiyo-menu-key-bound" "$menu_key"
+  else
+    tmux set-option -guq "@_ukiyo-menu-key-bound"
   fi
 
   # set theme
