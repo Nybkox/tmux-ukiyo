@@ -72,6 +72,8 @@ main() {
   show_location=$(get_tmux_option "@ukiyo-show-location" true)
   fixed_location=$(get_tmux_option "@ukiyo-fixed-location")
   show_powerline=$(get_tmux_option "@ukiyo-show-powerline" false)
+  transparent_powerline_bg=$(get_tmux_option "@ukiyo-transparent-powerline-bg" false)
+  inverse_divider=$(get_tmux_option "@ukiyo-inverse-divider" )
   show_flags=$(get_tmux_option "@ukiyo-show-flags" false)
   status_bg=$(get_tmux_option "@ukiyo-status-bg" bg_bar)
 
@@ -145,9 +147,22 @@ main() {
     window_right_sep=''
   fi
 
+  status_bar_bg=${!status_bg}
+  window_bar_bg=${bg_bar}
+  current_window_left_sep=${left_sep}
+  current_window_left_fg=${bg_bar}
+  current_window_left_bg=${selection}
+  if $transparent_powerline_bg; then
+    status_bar_bg=default
+    window_bar_bg=default
+    current_window_left_sep=${inverse_divider}
+    current_window_left_fg=${selection}
+    current_window_left_bg=default
+  fi
+
   # Left icon, with prefix status
-  tmux set-option -g status-left "#{?client_prefix,#[fg=${!left_icon_prefix_fg}],#[fg=${!left_icon_fg}]}#{?client_prefix,#[bg=${!left_icon_prefix_bg}],#[bg=${!left_icon_bg}]}${icon_pd_l}${left_icon_content}${icon_pd_r}#{?client_prefix,#[fg=${!left_icon_prefix_bg}],#[fg=${!left_icon_bg}]}#[bg=${!status_bg}]${left_sep}${icon_mg_r}"
-  powerbg=${!status_bg}
+  tmux set-option -g status-left "#{?client_prefix,#[fg=${!left_icon_prefix_fg}],#[fg=${!left_icon_fg}]}#{?client_prefix,#[bg=${!left_icon_prefix_bg}],#[bg=${!left_icon_bg}]}${icon_pd_l}${left_icon_content}${icon_pd_r}#{?client_prefix,#[fg=${!left_icon_prefix_bg}],#[fg=${!left_icon_bg}]}#[bg=${status_bar_bg}]${left_sep}${icon_mg_r}"
+  powerbg=${status_bar_bg}
 
   # Set timezone unless hidden by configuration
   if [[ -z "$timezone" ]]; then
@@ -198,7 +213,7 @@ main() {
   tmux set-option -g message-style "bg=${bg_bar},fg=${text}"
 
   # status bar
-  tmux set-option -g status-style "bg=${!status_bg},fg=${text}"
+  tmux set-option -g status-style "bg=${status_bar_bg},fg=${text}"
 
   # Handle left icon margin
   icon_mg_r=""
@@ -361,21 +376,22 @@ main() {
       if $show_empty_plugins; then
         tmux set-option -ga status-right "#[fg=${!colors[0]},bg=${powerbg},nobold,nounderscore,noitalics]${right_sep}#[fg=${!colors[1]},bg=${!colors[0]}] $script "
       else
-        tmux set-option -ga status-right "#{?#{==:$script,},,#[fg=${!colors[0]},nobold,nounderscore,noitalics]${right_sep}#[fg=${!colors[1]},bg=${!colors[0]}] $script }"
+        # Keep style attributes comma-free inside tmux conditional branches.
+        tmux set-option -ga status-right "#{?#{==:$script,},,#[fg=${!colors[0]}]#[nobold]#[nounderscore]#[noitalics]${right_sep}#[fg=${!colors[1]}]#[bg=${!colors[0]}] $script }"
       fi
       powerbg=${!colors[0]}
     else
       if $show_empty_plugins; then
         tmux set-option -ga status-right "#[fg=${!colors[1]},bg=${!colors[0]}] $script "
       else
-        tmux set-option -ga status-right "#{?#{==:$script,},,#[fg=${!colors[1]},bg=${!colors[0]}] $script }"
+        tmux set-option -ga status-right "#{?#{==:$script,},,#[fg=${!colors[1]}]#[bg=${!colors[0]}] $script }"
       fi
     fi
   done
 
   # Window option
   if $show_powerline; then
-    tmux set-window-option -g window-status-current-format "#[fg=${bg_bar},bg=${selection}]${left_sep}#[fg=${text},bg=${selection}] #I #W${current_flags} #[fg=${selection},bg=${bg_bar}]${left_sep}"
+    tmux set-window-option -g window-status-current-format "#[fg=${current_window_left_fg},bg=${current_window_left_bg}]${current_window_left_sep}#[fg=${text},bg=${selection}] #I #W${current_flags} #[fg=${selection},bg=${window_bar_bg}]${left_sep}"
   else
     tmux set-window-option -g window-status-current-format "#[fg=${text},bg=${selection}] #I #W${current_flags} "
   fi
@@ -384,7 +400,7 @@ main() {
     tmux set-window-option -g window-style "fg=${text},bg=${bg_pane}"
   fi
 
-  tmux set-window-option -g window-status-format "#[fg=${text}]#[bg=${bg_bar}] #I #W${flags}"
+  tmux set-window-option -g window-status-format "#[fg=${text}]#[bg=${window_bar_bg}] #I #W${flags}"
   tmux set-window-option -g window-status-activity-style "bold"
   tmux set-window-option -g window-status-bell-style "bold"
 }

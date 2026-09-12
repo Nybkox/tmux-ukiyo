@@ -89,6 +89,18 @@ Enable powerline symbols
 set -g @ukiyo-show-powerline true
 ```
 
+Enable terminal-background transparency around powerline and window segments
+
+```bash
+set -g @ukiyo-transparent-powerline-bg true
+```
+
+Customize the leading current-window divider used in transparent mode
+
+```bash
+set -g @ukiyo-inverse-divider 
+```
+
 Switch powerline symbols
 
 ```bash
