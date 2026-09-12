@@ -258,6 +258,26 @@ set -g @ukiyo-time-format "%F %R"
 
 See [[this page]](https://man7.org/linux/man-pages/man1/date.1.html) for other format symbols.
 
+#### cwd options
+
+Add `cwd` to your `@ukiyo-plugins` list to display the active pane's current directory:
+
+```bash
+set -g @ukiyo-plugins "cwd"
+set -g @ukiyo-cwd-max-dirs "2"
+set -g @ukiyo-cwd-max-chars "40"
+```
+
+Both limits default to `0` (unlimited) and accept nonnegative integers.
+`@ukiyo-cwd-max-dirs` keeps the trailing directory components, prefixing shortened
+paths with `…/`. For example, `~/projects/tmux/plugins` becomes `…/tmux/plugins`
+with a directory limit of `2`.
+
+The character limit applies after directory shortening. When exceeded,
+`@ukiyo-cwd-max-chars` keeps the last N characters and prepends `…/…`, matching
+Dracula's behavior. The marker is additional to the limit, so a value of `40`
+can display 43 characters. Your home directory displays as `~`.
+
 #### git options
 
 Hide details of git changes
